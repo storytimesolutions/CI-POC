@@ -28,7 +28,7 @@ gulp.task('serve', function () {
     /**
      * Watch for all other changes, reload the whole page
      */
-    gulp.watch(["*.html", "*.ejs", "*.jade", "*.js", "*.json", "*.md"], function () {
+    gulp.watch(["*.html", "app/**/*.html", "*.ejs", "*.jade", "*.js", "app/**/*.js", "*.json", "**/*.md"], function () {
       reload();
     });
   })
