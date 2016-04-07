@@ -4,15 +4,14 @@ This project is meant to be a proof of concept of how to use GitHub + TravisCI t
 ## Getting Started
 You will need Git and Node.js installed on your machine.  For Git, I recommended downloading the [GitHub Desktop tool](https://desktop.github.com/) which is OSX and Windows compatible.   
 
-1. Clone the project to your machine using command line or GitHub Desktop tool
-```powershell
-git clone https://github.com/storytimesolutions/CI-POC
-```
-2. Install the dev dependencies
-```powershell
+```Powershell
+# Clone source code to local computer
+git clone https://github.com/storytimesolutions/CI-POC CI-POC
+cd CI-POC
+
+# Install dev dependencies
 npm install 
-```
-3. Start working! (Spins up harp server with browser sync in case you were interested)
-```powershell 
+
+# Start server!
 gulp
 ```
