@@ -8,11 +8,11 @@ You will need Git and Node.js installed on your machine.  For Git, I recommended
 ```powershell
 git clone https://github.com/storytimesolutions/CI-POC
 ```
-1. Install the dev dependencies
+2. Install the dev dependencies
 ```powershell
 npm install 
 ```
-1. Start working! (Spins up harp server with browser sync in case you were interested)
+3. Start working! (Spins up harp server with browser sync in case you were interested)
 ```powershell 
 gulp
 ```
