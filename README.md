@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/storytimesolutions/CI-POC.svg?branch=master)](https://travis-ci.org/storytimesolutions/CI-POC)
+
 # CI-POC
 This project is meant to be a proof of concept of how to use GitHub + TravisCI to have a Contintuous Integration environment.  For fun, we use newer technologies as well because we just like to :)
 
