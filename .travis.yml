@@ -8,9 +8,11 @@ before_install:
     
 install:
     - echo "Installing..."
+    - npm install    
     
 before_script:
     - echo "Before script..."
+    - npm test
     
 script:
     - echo "Script..."
