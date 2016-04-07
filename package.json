@@ -4,7 +4,7 @@
   "description": "Angular POC with Travis CI tests and deployment",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,11 @@
     "bootstrap": "^3.3.6",
     "browser-sync": "^2.11.2",
     "gulp": "^3.9.1",
-    "harp": "^0.20.3"
+    "harp": "^0.20.3",
+    "jasmine-core": "^2.4.1",
+    "karma": "^0.13.22",
+    "karma-chrome-launcher": "^0.2.3",
+    "karma-firefox-launcher": "^0.1.7",
+    "karma-jasmine": "^0.3.8"
   }
 }

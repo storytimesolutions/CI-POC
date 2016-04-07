@@ -2,6 +2,7 @@ var gulp        = require('gulp');
 var browserSync = require('browser-sync');
 var reload      = browserSync.reload;
 var harp        = require('harp');
+var Server      = require('karma').Server;
 
 /**
  * Serve the Harp Site from the src directory
@@ -32,6 +33,14 @@ gulp.task('serve', function () {
       reload();
     });
   })
+});
+
+//Run Jasmine Tests with Karma
+gulp.task('test', function(done){
+    new Server({
+        configFile: __dirname + '/karma-js.conf.js',
+        singleRun: true
+    }, done).start();
 });
 
 /**
