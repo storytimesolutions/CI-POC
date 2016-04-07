@@ -3,23 +3,30 @@ language: nodes_js
 node_js:
     - '5.4.1'
 
-before_install:
+#before_install:
     - echo "Before Install..."
     
-install:
-    - echo "Installing..."
-    - npm install -g karma
-    - npm install    
-    
-before_script:
-    #  For Firefox Karma Tests
+#install:
+#    - echo "Installing..."
+#    - npm install -g karma
+#    - npm install    
+
+script: node_modules/karma/bin/karma start karma-js.conf.js --single-run
+before_install:
     - export DISPLAY=:99.0
     - sh -e /etc/init.d/xvfb start
-    - sleep 5
-    - karma start --browsers Firefox --single-run
+before_script:
+    - npm install
+
+#before_script:
+    #  For Firefox Karma Tests
+    #- export DISPLAY=:99.0
+    #- sh -e /etc/init.d/xvfb start
+    #- sleep 5
+    #- karma start --browsers Firefox --single-run
     
-script:
-    - echo "Script..."
+#script:
+   # - echo "Script..."
     
-after_script:
-    - echo "After script..."
+#after_script:
+ #   - echo "After script..."
