@@ -12,11 +12,12 @@ gulp.task('serve', function () {
   }, function () {
     browserSync({
       proxy: "localhost:9000",
-      open: true,
-      /* Hide the notification. It gets annoying */
+      open: true
+      /*,
+      //Hide the notification. It gets annoying
       notify: {
         styles: ['opacity: 0', 'position: absolute']
-      }
+      }*/
     });
     /**
      * Watch for scss changes, tell BrowserSync to refresh main.css

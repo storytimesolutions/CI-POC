@@ -1,0 +1,16 @@
+<h1>About</h1>
+
+<h3>Meet the Development Team</h3>
+<p>We are proud of our development team and we are constantly growing.</p>
+    
+<div class="row">
+  <div class="col-sm-6 col-md-4" ng-repeat="dev in aboutCtrl.developers">
+    <div class="thumbnail">
+      <img ng-src="{{dev.imageUrl}}" alt="{{dev.name}}">
+      <div class="caption">
+        <h3>{{dev.name}}</h3>
+        <p>{{dev.bio}}</p>
+      </div>
+    </div>
+  </div>
+</div>
