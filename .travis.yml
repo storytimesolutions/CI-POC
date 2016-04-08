@@ -18,6 +18,9 @@ before_install:
 before_script:
     - npm install
 
+deploy:
+    provider: azure_web_apps
+
 #before_script:
     #  For Firefox Karma Tests
     #- export DISPLAY=:99.0
@@ -30,6 +33,3 @@ before_script:
     
 #after_script:
  #   - echo "After script..."
- 
- deploy:
-    provider: azure_web_apps
