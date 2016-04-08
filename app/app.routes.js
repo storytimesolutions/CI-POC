@@ -2,7 +2,7 @@
     'use strict';
     
     angular.module('app')
-        .config(function($routeProvider, $locationProvider){
+        .config(function($routeProvider){
             $routeProvider
                 .when('/' , {
                     templateUrl: 'app/components/home/homeView.html'

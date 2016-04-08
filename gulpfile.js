@@ -4,6 +4,23 @@ var reload      = browserSync.reload;
 var harp        = require('harp');
 var Server      = require('karma').Server;
 
+
+var bases = {
+    app: 'app/',
+    dist: 'dist/',
+    libs: 'assets/libs/'
+}
+
+var paths = {
+    libs: [
+        'node_modules/angular/angular.min.js',
+        'node_modules/angular-route/angular-route.min.js',
+        'node_modules/bootstrap/dist/js/bootstrap.min.js',
+        'node_modules/bootstrap/dist/css/bootstrap.min.css'
+    ]
+}
+
+
 /**
  * Serve the Harp Site from the src directory
  */
@@ -45,8 +62,14 @@ gulp.task('tdd', function(done){
     }, done).start();
 });
 
+//Copy files where they need to go
+gulp.task('copy', function(){
+    gulp.src(paths.libs)
+        .pipe(gulp.dest(bases.libs));
+});
+
 /**
  * Default task, running `gulp` will fire up the Harp site,
  * launch BrowserSync & watch files.
  */
-gulp.task('default', ['serve', 'tdd']);
+gulp.task('default', ['copy', 'serve', 'tdd']);
