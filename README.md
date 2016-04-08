@@ -14,6 +14,6 @@ cd CI-POC
 # Install dev dependencies
 npm install 
 
-# Start server!
+# Start server (with tests running :))!
 gulp
 ```
