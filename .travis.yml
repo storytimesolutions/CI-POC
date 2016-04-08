@@ -5,31 +5,17 @@ node_js:
 
 #before_install:
     - echo "Before Install..."
-    
-#install:
-#    - echo "Installing..."
-#    - npm install -g karma
-#    - npm install    
-
-script: node_modules/karma/bin/karma start karma-js.conf.js --single-run
 before_install:
     - export DISPLAY=:99.0
     - sh -e /etc/init.d/xvfb start
+#install:
 before_script:
     - npm install
-
+script: 
+    - node_modules/karma/bin/karma start karma-js.conf.js --single-run
+#after_success or after_failure
+#before_deploy:
 deploy:
     provider: azure_web_apps
-
-#before_script:
-    #  For Firefox Karma Tests
-    #- export DISPLAY=:99.0
-    #- sh -e /etc/init.d/xvfb start
-    #- sleep 5
-    #- karma start --browsers Firefox --single-run
-    
-#script:
-   # - echo "Script..."
-    
-#after_script:
- #   - echo "After script..."
+#after_deploy
+#after_script

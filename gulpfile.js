@@ -14,11 +14,6 @@ gulp.task('serve', function () {
     browserSync({
       proxy: "localhost:9000",
       open: true
-      /*,
-      //Hide the notification. It gets annoying
-      notify: {
-        styles: ['opacity: 0', 'position: absolute']
-      }*/
     });
     /**
      * Watch for scss changes, tell BrowserSync to refresh main.css
@@ -35,7 +30,7 @@ gulp.task('serve', function () {
   })
 });
 
-//Run Jasmine Tests with Karma
+//Run Jasmine Tests one-time with Karma
 gulp.task('test', function(done){
     new Server({
         configFile: __dirname + '/karma-js.conf.js',
@@ -43,8 +38,15 @@ gulp.task('test', function(done){
     }, done).start();
 });
 
+//Be in TDD mode (Run tests on every change)
+gulp.task('tdd', function(done){
+    new Server({
+        configFile: __dirname + '/karma-js.conf.js'
+    }, done).start();
+});
+
 /**
  * Default task, running `gulp` will fire up the Harp site,
  * launch BrowserSync & watch files.
  */
-gulp.task('default', ['serve']);
+gulp.task('default', ['serve', 'tdd']);

@@ -1,10 +1,4 @@
-describe("A suite", function() {
-  it("contains spec with an expectation", function() {
-    expect(true).toBe(true);
-  });
-});
-
-describe("app", function() {
+describe("AboutController", function() {
   beforeEach(module('app'));
 
   var $controller;
@@ -14,8 +8,8 @@ describe("app", function() {
     $controller = _$controller_;
   }));
   
-  it("can be initialized", function() {
+  it("has two developers", function() {
     var controller = $controller('AboutController', {});
-    expect(controller.developers).toBeDefined();
+    expect(controller.developers.length).toEqual(2);
   });
 });
