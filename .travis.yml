@@ -30,3 +30,6 @@ before_script:
     
 #after_script:
  #   - echo "After script..."
+ 
+ deploy:
+    provider: azure_web_apps
