@@ -3,18 +3,19 @@ language: nodes_js
 node_js:
     - '5.4.1'
 
-#before_install:
-#    - export DISPLAY=:99.0
-#    - sh -e /etc/init.d/xvfb start
+before_install:
+    - export DISPLAY=:99.0
+    - sh -e /etc/init.d/xvfb start
 #install:
-#before_script:
-#    - npm install
-#script: 
-#    - node_modules/karma/bin/karma start karma-js.conf.js --single-run
+before_script:
+    - npm install
+script: 
+    - node_modules/karma/bin/karma start karma-js.conf.js --single-run
 #after_success or after_failure
 #before_deploy:
 deploy:
-    skip_cleanup: true
     provider: azure_web_apps
+    skip_cleanup: true
+    verbose: true
 #after_deploy
 #after_script
