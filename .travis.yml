@@ -1,4 +1,4 @@
-language: nodes_js
+language: node_js
 
 node_js:
     - '5.4.1'
@@ -15,6 +15,6 @@ script:
 #before_deploy:
 deploy:
     provider: azure_web_apps
-    #skip_cleanup: true
+    skip_cleanup: true
 #after_deploy
 #after_script
