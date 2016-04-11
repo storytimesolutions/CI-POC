@@ -5,6 +5,23 @@ var harp        = require('harp');
 var Server      = require('karma').Server;
 
 
+/*Gulp Final Product Desires
+1) Run local server in dev or prod version
+    a) Automatic Browser Refresh on Change
+2) Run Jasmine tests with each change
+3) Concat all angular app files into a dev versions 
+    a) File by type (Controllers?  Services?  All?)
+4) Minify concat files for Production
+5) Move dependencies from packages to local directory for dev environment
+
+Future thoughts
+1) Change out local project dependencies with CDNs on Prod deployment
+2) Commitizen - Better commits confirming to standards
+
+Article to review - blog.rangle.io/angular-gulp-bestpractices
+
+*/
+
 var bases = {
     app: 'app/',
     dist: 'dist/',
