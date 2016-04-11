@@ -2,7 +2,7 @@
     'use strict';
     
     angular.module('app')
-        .controller('AboutController', function(){
+        .controller('HomeController', function(){
             var vm = this;
         })
     
