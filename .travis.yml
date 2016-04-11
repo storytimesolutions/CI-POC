@@ -10,7 +10,8 @@ before_script:
     - npm install
 script: 
     - node_modules/karma/bin/karma start karma-js.conf.js --single-run
-#after_success or after_failure
+after_success:# or after_failure
+    - scripts/travis/before_deploy.sh
 before_deploy:
     - scripts/travis/before_deploy.sh
 deploy:
@@ -18,7 +19,7 @@ deploy:
     username: $azure_username
     password: $azure_password
     site: $azure_site
-    on: $azure_watch_branch
+    on: dev
     #skip_cleanup: true
 #after_deploy
 #after_script
