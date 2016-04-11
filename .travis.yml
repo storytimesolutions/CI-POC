@@ -11,10 +11,14 @@ before_script:
 script: 
     - node_modules/karma/bin/karma start karma-js.conf.js --single-run
 #after_success or after_failure
-#before_deploy:
+before_deploy:
+    - scripts/travis/before_deploy.sh
 deploy:
     provider: azure_web_apps
-    on: master
+    username: $azure_username
+    password: $azure_password
+    site: $azure_site
+    on: $azure_watch_branch
     #skip_cleanup: true
 #after_deploy
 #after_script
