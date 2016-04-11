@@ -13,10 +13,10 @@ echo '$AZURE_WA_USERNAME: '$AZURE_WA_USERNAME
 SITE=""
 BRANCH=""
 
-if [ "${TRAVIS_BRANCH}" = "master"]; then
+if [ "${TRAVIS_BRANCH}" = "master" ]; then
     SITE=$AZURE_WA_SITE_PROD
     BRANCH="master"
-elif [ "${TRAVIS_BRANCH}" = "dev"]; then
+elif [ "${TRAVIS_BRANCH}" = "dev" ]; then
     SITE=$AZURE_WA_SITE_DEV
     BRANCH="dev"
 fi
