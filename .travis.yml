@@ -1,7 +1,6 @@
 language: node_js
-
 node_js:
-    - '5.4.1'
+    - 5.4.1
 
 before_install:
     - export DISPLAY=:99.0
@@ -15,6 +14,7 @@ script:
 #before_deploy:
 deploy:
     provider: azure_web_apps
-    skip_cleanup: true
+    on: master
+    #skip_cleanup: true
 #after_deploy
 #after_script
