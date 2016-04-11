@@ -6,7 +6,7 @@ echo '*** Before Deploy ***'
 echo '*********************'
 
 #Set environment variables
-echo "TRAVIS_BUILD : {TRAVIS_BUILD}"
+echo "TRAVIS_BUILD : ${TRAVIS_BUILD}"
 echo '$TRAVIS_BUILD :'$TRAVIS_BUILD
 echo '$AZURE_WA_USERNAME: '$AZURE_WA_USERNAME
 
@@ -21,7 +21,7 @@ elif [ "${TRAVIS_BRANCH}" = "dev" ]; then
     BRANCH="dev"
 fi
 
-export $azure_username=$AZURE_WA_USERNAME
-export $azure_password=$AZURE_WA_PASSWORD
-export $azure_site=SITE
-export $azure_on_branch=BRANCH
+export azure_username=$AZURE_WA_USERNAME
+export azure_password=$AZURE_WA_PASSWORD
+export azure_site=SITE
+export azure_on_branch=BRANCH
