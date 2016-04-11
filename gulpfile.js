@@ -23,9 +23,9 @@ Article to review - blog.rangle.io/angular-gulp-bestpractices
 */
 
 var bases = {
-    app: 'app/',
+    app: 'src/app/',
     dist: 'dist/',
-    libs: 'assets/libs/'
+    libs: 'src/assets/libs/'
 }
 
 var paths = {
@@ -42,7 +42,7 @@ var paths = {
  * Serve the Harp Site from the src directory
  */
 gulp.task('serve', function () {
-  harp.server(__dirname, {
+  harp.server(__dirname + '/src' , {
     port: 9000
   }, function () {
     browserSync({
@@ -58,7 +58,7 @@ gulp.task('serve', function () {
     /**
      * Watch for all other changes, reload the whole page
      */
-    gulp.watch(["*.html", "app/**/*.html", "*.ejs", "*.jade", "*.js", "app/**/*.js", "*.json", "**/*.md"], function () {
+    gulp.watch(["*.html", "src/app/**/*.html", "*.ejs", "*.jade", "*.js", "src/app/**/*.js", "*.json", "**/*.md"], function () {
       reload();
     });
   })

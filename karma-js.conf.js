@@ -19,7 +19,7 @@ module.exports = function(config) {
       'node_modules/angular-route/angular-route.min.js',
       'node_modules/angular-mocks/angular-mocks.js',
       'node_modules/angular-scenario/angular-scenario.js',
-      'app/**/*.js',
+      'src/app/**/*.js',
       'tests/**/*spec.js'
     ],
 

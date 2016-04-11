@@ -2,7 +2,7 @@
   "name": "ci-poc",
   "version": "1.0.0",
   "description": "Angular POC with Travis CI tests and deployment",
-  "main": "index.html",
+  "main": "src/index.html",
   "scripts": {
     "test": "gulp test"
   },
