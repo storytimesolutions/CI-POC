@@ -19,8 +19,14 @@ deploy:
     provider: azure_web_apps
     username: $azure_username
     password: $azure_password
-    site: $azure_site
-    on: $azure_on_branch
+    site: $AZURE_WA_SITE_DEV
+    on: dev
+deploy:
+    provider: azure_web_apps
+    username: $azure_username
+    password: $azure_password
+    site: $AZURE_WA_SITE_PROD
+    on: master
     #skip_cleanup: true
 #after_deploy
 #after_script
