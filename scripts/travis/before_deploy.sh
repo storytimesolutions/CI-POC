@@ -6,9 +6,8 @@ echo '*** Before Deploy ***'
 echo '*********************'
 
 #Set environment variables
-echo 'TRAVIS_BUILD : 'TRAVIS_BUILD
-echo '$TRAVIS_BUILD :'$TRAVIS_BUILD
-echo '$AZURE_WA_USERNAME: '$AZURE_WA_USERNAME
+echo "TRAVIS_BRANCH is $TRAVIS_BRANCH"
+echo "AZURE_WA_USERNAME is $AZURE_WA_USERNAME"
 
 SITE=""
 BRANCH=""
