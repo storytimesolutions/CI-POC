@@ -25,3 +25,8 @@ export azure_username=$AZURE_WA_USERNAME
 export azure_password=$AZURE_WA_PASSWORD
 export azure_site=SITE
 export azure_on_branch=BRANCH
+
+echo 'azure_username: 'azure_username
+echo 'azure_password: 'azure_password
+echo 'azure_site: 'azure_site
+echo 'azure_on_branch: 'azure_on_branch
