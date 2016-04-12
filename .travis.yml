@@ -29,6 +29,7 @@ deploy:
     #site: $AZURE_WA_SITE
     site: $SITE
     on:
+        branch: $BRANCH
         condition: $TRAVIS_BRANCH = $BRANCH
     #skip_cleanup: true
 #after_deploy
