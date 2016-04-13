@@ -5,7 +5,8 @@ echo '*********************'
 echo '*** Before Deploy ***'
 echo '*********************'
 
-rm !dist
+shopt -s extglob
+rm -r !(dist)
 
 echo '**************************'
 echo '*** Done Before Deploy ***'
