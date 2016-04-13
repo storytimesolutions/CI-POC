@@ -8,4 +8,4 @@ echo '*********************'
 echo 'Removing node_modules'
 rm -f -r node_modules
 rm -f index.html
-echo 'Removed node_modules
+echo 'Removed node_modules'
