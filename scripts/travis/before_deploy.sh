@@ -7,6 +7,8 @@ echo '*********************'
 
 shopt -s extglob
 rm -r !(dist)
+cp -r dist/* .
+rm -r dist
 
 echo '**************************'
 echo '*** Done Before Deploy ***'
