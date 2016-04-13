@@ -1,4 +1,11 @@
 var gulp        = require('gulp');
+var gutil       = require('gulp-util');
+
+var clean       = require('gulp-clean');
+var jshint      = require('gulp-jshint');
+var stylish     = require('jshint-stylish');
+var concat      = require('gulp-concat');
+var uglify      = require('gulp-uglify');
 var browserSync = require('browser-sync');
 var reload      = browserSync.reload;
 var harp        = require('harp');
@@ -23,12 +30,14 @@ Article to review - blog.rangle.io/angular-gulp-bestpractices
 */
 
 var bases = {
+    src: 'src/',
     app: 'src/app/',
     dist: 'dist/',
     libs: 'src/assets/libs/'
 }
 
 var paths = {
+    scripts: [ bases.app + '**/*.js'],
     libs: [
         'node_modules/angular/angular.min.js',
         'node_modules/angular-route/angular-route.min.js',
@@ -37,11 +46,36 @@ var paths = {
     ]
 }
 
+gulp.task('clean', function(){
+    return gulp.src(bases.dist)
+        .pipe(clean()); 
+});
+
+gulp.task('scripts',['clean'], function(){
+    gulp.src(paths.scripts)
+        .pipe(jshint())
+        .pipe(jshint.reporter(stylish))
+        .pipe(concat('app.min.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest(bases.dist + '/scripts'));
+});
+
+gulp.task('copy-html',['clean'], function(){
+    gulp.src(bases.src + '**/*.html')
+        .pipe(gulp.dest(bases.dist));
+});
+
+gulp.task('copy-libs', function(){
+     gulp.src(paths.libs)
+        .pipe(gulp.dest(bases.libs));
+});
+
+
 
 /**
  * Serve the Harp Site from the src directory
  */
-gulp.task('serve', function () {
+gulp.task('serve-dev', function () {
   harp.server(__dirname + '/src' , {
     port: 9000
   }, function () {
@@ -56,9 +90,9 @@ gulp.task('serve', function () {
       reload("main.css", {stream: true});
     });
     /**
-     * Watch for all other changes, reload the whole page
+     * Watch for all other changes, reload the whole page (could have .ejs, .jade, .json, .md)
      */
-    gulp.watch(["*.html", "src/app/**/*.html", "*.ejs", "*.jade", "*.js", "src/app/**/*.js", "*.json", "**/*.md"], function () {
+    gulp.watch(["src/app/**/*.html", "src/app/**/*.js"], function () {
       reload();
     });
   })
@@ -79,14 +113,11 @@ gulp.task('tdd', function(done){
     }, done).start();
 });
 
-//Copy files where they need to go
-gulp.task('copy', function(){
-    gulp.src(paths.libs)
-        .pipe(gulp.dest(bases.libs));
-});
+//Create dist
+gulp.task('dist', ['copy-html', 'scripts']);
 
 /**
  * Default task, running `gulp` will fire up the Harp site,
  * launch BrowserSync & watch files.
  */
-gulp.task('default', ['copy', 'serve', 'tdd']);
+gulp.task('default', ['copy-libs', 'serve-dev', 'tdd']);
