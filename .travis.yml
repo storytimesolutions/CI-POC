@@ -3,18 +3,19 @@ node_js:
     - 4.4.0
 env:
     - SITE=github-travis-poc2 BRANCH=master
-    - SITE=github-travis-poc2-dev BRANCH=dev
+#    - SITE=github-travis-poc2-dev BRANCH=dev
 
 # Limit Travis Builds to only master and dev branch
 branches:
     only:
         - master
-        - dev
+#        - dev
 
 before_install:
     - export DISPLAY=:99.0
     - sh -e /etc/init.d/xvfb start
-    - ./scripts/travis/before_deploy.sh
+#    - ./scripts/travis/before_deploy.sh
+
 #install:
 before_script:
     - npm install
@@ -28,9 +29,10 @@ deploy:
     provider: azure_web_apps
     #site: $AZURE_WA_SITE
     site: $SITE
-    on:
-        branch: $BRANCH
-        condition: $TRAVIS_BRANCH = $BRANCH
+    #on:
+    #    branch: $BRANCH
+    #    condition: $TRAVIS_BRANCH = $BRANCH
     #skip_cleanup: true
+
 #after_deploy
 #after_script
