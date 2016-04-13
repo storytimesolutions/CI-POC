@@ -72,7 +72,7 @@ gulp.task('prod-watch', ['dist'], browserSync.reload);
 gulp.task('dev-watch', ['test'], browserSync.reload);
 
 /**
- * Serve the Harp Site from the dist directory
+ * Serve the site from the dist directory
  */
 gulp.task('serve-prod', function () {
     browserSync.init({
@@ -84,7 +84,7 @@ gulp.task('serve-prod', function () {
 });
 
 /**
- * Serve the Harp Site from the src directory
+ * Serve the site from the src directory
  */
 gulp.task('serve-dev', ['copy-libs'], function () {
     browserSync.init({
@@ -118,3 +118,27 @@ gulp.task('dist', ['copy-html', 'package-scripts']);
  * Default task, running `gulp` will launch BrowserSync & watch files.
  */
 gulp.task('default', ['serve-dev']);
+
+/* Needed Items: 
+Dev:
+    serve-dev
+        On start:
+            - push lib files
+        Every change:
+            - run jshint
+            - run unit tests
+            - refresh browser
+
+Prod:
+    serve-prod
+        On start:
+            - push lib files/change references to prod
+        Every change:
+            - run jshint
+            - run unit tests
+    prod-tests  
+        - run jshint
+        - run unit tests
+        - run protractor tests
+        
+*/
