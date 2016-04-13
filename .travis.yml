@@ -18,6 +18,7 @@ before_install:
 #install:
 before_script:
     - npm install
+    - gulp dist
 script: 
     - node_modules/karma/bin/karma start karma-js.conf.js --single-run
 #after_success:# or after_failure
