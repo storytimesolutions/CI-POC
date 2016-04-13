@@ -27,12 +27,12 @@ before_deploy:
     
 deploy:
     provider: azure_web_apps
+    skip_cleanup: true
     #site: $AZURE_WA_SITE
     site: $SITE
     #on:
     #    branch: $BRANCH
     #    condition: $TRAVIS_BRANCH = $BRANCH
-    #skip_cleanup: true
 
 #after_deploy
 #after_script
