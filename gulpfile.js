@@ -5,7 +5,11 @@ var clean       = require('gulp-clean');
 var jshint      = require('gulp-jshint');
 var stylish     = require('jshint-stylish');
 var concat      = require('gulp-concat');
+var concatCss   = require('gulp-concat-css');
+var cleanCss    = require('gulp-clean-css');
 var uglify      = require('gulp-uglify');
+var rename      = require('gulp-rename');
+var htmlreplace = require('gulp-html-replace');
 var browserSync = require('browser-sync').create();
 var Server      = require('karma').Server;
 
@@ -16,8 +20,8 @@ XXX    a) Automatic Browser Refresh on Change
 XXX - 2) Run Jasmine tests with each change
 XXX - 3) Concat all angular app files into a dev versions 
 XXX - 4) Minify concat files for Production
-5) Move dependencies from packages to local directory for dev environment
-6) Get Prod Version working locally 
+XXX 5) Move dependencies from packages to local directory for dev environment
+XXX 6) Get Prod Version working locally 
 
 Future thoughts
 1) Change out local project dependencies with CDNs on Prod deployment
@@ -29,13 +33,17 @@ Article to review - blog.rangle.io/angular-gulp-bestpractices
 
 var bases = {
     src: 'src/',
-    app: 'src/app/',
+    src_app: 'src/app/',
+    src_assets: 'src/assets/',
+    src_libs: 'src/assets/libs/',
+    src_imgs: 'src/assets/images/',
     dist: 'dist/',
-    libs: 'src/assets/libs/'
+    dist_scripts: 'dist/scripts',
+    dist_assets: 'dist/assets'
 }
 
 var paths = {
-    scripts: [ bases.app + '**/*.js'],
+    scripts: [ bases.src_app + '**/*.js'],
     libs: [
         'node_modules/angular/angular.min.js',
         'node_modules/angular-route/angular-route.min.js',
@@ -44,37 +52,62 @@ var paths = {
     ]
 }
 
+/////////////////////////
+/// PROD / DIST Tasks ///
+/////////////////////////
+
 gulp.task('clean', function(){
     return gulp.src(bases.dist)
-        .pipe(clean()); 
+        .pipe(clean({force: true}));
 });
 
-gulp.task('package-scripts',['clean'], function(){
+gulp.task('package-scripts', ['clean'], function(){
     return gulp.src(paths.scripts)
         .pipe(jshint())
         .pipe(jshint.reporter(stylish))
-        .pipe(concat('app.min.js'))
+        .pipe(concat('app.js'))
+        .pipe(gulp.dest(bases.dist_scripts))
         .pipe(uglify())
-        .pipe(gulp.dest(bases.dist + '/scripts'));
+        .pipe(rename({ extname: '.min.js' }))
+        .pipe(gulp.dest(bases.dist_scripts));
 });
 
-gulp.task('copy-html',['clean'], function(){
+gulp.task('dist-html', ['clean'], function(){
     return gulp.src(bases.src + '**/*.html')
+        .pipe(htmlreplace({
+            'css': 'app.css',
+            'js': 'scripts/app.js'
+        }))
+        .pipe(gulp.dest(bases.dist));
+});
+
+gulp.task('dist-assets', ['clean', 'copy-libs'], function(){
+    return gulp.src(bases.src_assets + '**/*.*')
+        .pipe(gulp.dest(bases.dist_assets));
+});
+
+gulp.task('package-css', ['clean'], function(){
+    return gulp.src([bases.src + '/*.css',bases.src_app + '/**/*.css'])
+        .pipe(concatCss('app.css'))
+        .pipe(gulp.dest(bases.dist))
+        .pipe(cleanCss())
+        .pipe(rename({ extname: '.min.css'} ))
         .pipe(gulp.dest(bases.dist));
 });
 
 gulp.task('copy-libs', function(){
      return gulp.src(paths.libs)
-        .pipe(gulp.dest(bases.libs));
+        .pipe(gulp.dest(bases.src_libs));
 });
 
-gulp.task('prod-watch', ['dist'], browserSync.reload);
-gulp.task('dev-watch', ['test'], browserSync.reload);
+// Can't clean while serving server :(
+//gulp.task('prod-watch', ['dist'], browserSync.reload);
 
-/**
- * Serve the site from the dist directory
- */
-gulp.task('serve-prod', function () {
+//Create distribution package
+gulp.task('dist', ['dist-html', 'dist-assets', 'package-css', 'package-scripts']);
+
+
+gulp.task('serve-prod', ['clean', 'dist'], function () {
     browserSync.init({
         server: __dirname + '/dist'
     });
@@ -83,17 +116,10 @@ gulp.task('serve-prod', function () {
     
 });
 
-/**
- * Serve the site from the src directory
- */
-gulp.task('serve-dev', ['copy-libs'], function () {
-    browserSync.init({
-        server: __dirname + '/src'
-    });
-    
-    gulp.watch(["src/**/*.html", "src/**/*.js"], ['dev-watch']);
-    
-});
+
+/////////////////
+/// DEV Tasks ///
+/////////////////
 
 //Run Jasmine Tests one-time with Karma
 gulp.task('test', function(done){
@@ -103,20 +129,27 @@ gulp.task('test', function(done){
     }, done).start();
 });
 
-//Be in TDD mode (Run tests on every change)
-gulp.task('tdd', function(done){
-    new Server({
-        configFile: __dirname + '/karma-js.conf.js',
-        singleRun: false
-    }, done).start();
+gulp.task('dev-watch', ['test'], browserSync.reload);
+
+// Serve the site from the src directory
+gulp.task('serve-dev', ['copy-libs'], function () {
+    browserSync.init({
+        server: __dirname + '/src'
+    });
+    
+    gulp.watch(["src/**/*.html", "src/**/*.js"], ['dev-watch']);
+    
 });
 
-//Create distribution package
-gulp.task('dist', ['copy-html', 'package-scripts']);
+// Currently, single run is solving this problem.
+//Be in TDD mode (Run tests on every change)
+// gulp.task('tdd', function(done){
+//     new Server({
+//         configFile: __dirname + '/karma-js.conf.js',
+//         singleRun: false
+//     }, done).start();
+// });
 
-/**
- * Default task, running `gulp` will launch BrowserSync & watch files.
- */
 gulp.task('default', ['serve-dev']);
 
 /* Needed Items: 
