@@ -2,7 +2,7 @@
 exports.config = {
   // The address of a running selenium server.
   //seleniumAddress: 'http://localhost:4444/wd/hub',
-  seleniumServerJar: './node_modules/protractor/selenium/selenium-server-standalone-2.48.2.jar',
+  seleniumServerJar: './node_modules/protractor/selenium/selenium-server-standalone-2.52.0.jar',
 
   chromeDriver: './node_modules/chromedriver/bin/chromedriver',
   
