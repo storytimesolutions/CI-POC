@@ -1,5 +1,6 @@
 var gulp        = require('gulp');
 var gutil       = require('gulp-util');
+var shell       = require('gulp-shell');
 
 var clean       = require('gulp-clean');
 var jshint      = require('gulp-jshint');
@@ -12,6 +13,8 @@ var rename      = require('gulp-rename');
 var htmlreplace = require('gulp-html-replace');
 var browserSync = require('browser-sync').create();
 var Server      = require('karma').Server;
+var protractor  = require('gulp-protractor').protractor;
+//var webdriver_standalone = require("gulp-protractor").webdriver_standalone;
 
 
 /*Gulp Final Product Desires
@@ -129,6 +132,22 @@ gulp.task('test', function(done){
     }, done).start();
 });
 
+// gulp.task('start-e2e-server', function(){
+//    (shell('webdriver-manager start')) 
+// });
+
+//gulp.task('webdriver-standalone', webdriver_standalone);
+
+//Run e2e test one-time with Protractor
+gulp.task('e2e', function(){
+    gulp.src('tests/e2e/**/*.js')
+        .pipe(protractor({
+            configFile: 'protractor.conf.js',
+            args: ['--baseUrl', 'http://127.0.0.1:8000']
+        }))
+        .on('error', function(e) { throw e });
+})
+
 gulp.task('dev-watch', ['test'], browserSync.reload);
 
 // Serve the site from the src directory
@@ -156,11 +175,11 @@ gulp.task('default', ['serve-dev']);
 Dev:
     serve-dev
         On start:
-            - push lib files
+            √ push lib files
         Every change:
-            - run jshint
-            - run unit tests
-            - refresh browser
+            √ run jshint
+            √ run unit tests
+            √ refresh browser
 
 Prod:
     serve-prod
