@@ -19,18 +19,19 @@ before_install:
 before_script:
     - npm install
     - gulp dist
+    
 script: 
     - node_modules/karma/bin/karma start karma-js.conf.js --single-run
     - gulp e2e
-#after_success:# or after_failure
-#    - scripts/travis/before_deploy.sh
+    
+#after_success or after_failure
+
 before_deploy:
     - ./scripts/travis/before_deploy.sh
     
 deploy:
     provider: azure_web_apps
     skip_cleanup: true
-    #site: $AZURE_WA_SITE
     site: $SITE
     #on:
     #    branch: $BRANCH

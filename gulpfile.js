@@ -106,7 +106,6 @@ gulp.task('copy-libs', function(){
 //Create distribution package
 gulp.task('dist', ['dist-html', 'dist-assets', 'package-css', 'package-scripts']);
 
-
 gulp.task('serve-prod', ['clean', 'dist'], function () {
     browserSync.init({
         server: __dirname + '/dist'
@@ -128,8 +127,10 @@ gulp.task('jshint', function(){
         .pipe(jshint.reporter(stylish)); 
 });
 
+gulp.task('test', ['unit-test', 'e2e'], function(){} );
+
 //Run Jasmine Tests one-time with Karma
-gulp.task('test', function(done){
+gulp.task('unit-test', function(done){
     new Server({
         configFile: __dirname + '/karma-js.conf.js',
         singleRun: true
@@ -157,7 +158,7 @@ gulp.task('serve-dev', ['copy-libs'], function () {
         server: __dirname + '/src'
     });
     
-    gulp.watch(["src/**/*.html", "src/**/*.js"], ['reload', 'jshint', 'test']);
+    gulp.watch(["src/**/*.html", "src/**/*.js"], ['reload', 'jshint', 'unit-test']);
     
 });
 

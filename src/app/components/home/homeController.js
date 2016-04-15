@@ -6,7 +6,7 @@
         .controller('HomeController', HomeController);
         
     function HomeController(){
-        var vm = this; 
+        var vm = this;
     }
     
 })();
