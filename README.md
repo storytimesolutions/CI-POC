@@ -11,9 +11,9 @@ You will need Git and Node.js installed on your machine.  For Git, I recommended
 git clone https://github.com/storytimesolutions/CI-POC CI-POC
 cd CI-POC
 
-# Install dev dependencies
+# Install project dev dependencies
 npm install 
 
-# Start server (with tests running :))!
+# Start dev server (with tests running)!
 gulp
 ```
