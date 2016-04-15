@@ -133,7 +133,8 @@ gulp.task('test', ['unit-test', 'e2e'], function(){} );
 gulp.task('unit-test', function(done){
     new Server({
         configFile: __dirname + '/karma-js.conf.js',
-        singleRun: true
+        singleRun: true,
+        //browsers: ['Firefox','Chrome','Safari', 'PhantomJS']
     }, done).start();
 });
 
@@ -167,7 +168,8 @@ gulp.task('serve-dev', ['copy-libs'], function () {
 gulp.task('tdd', function(done){
     new Server({
         configFile: __dirname + '/karma-js.conf.js',
-        singleRun: false
+        singleRun: false,
+        //browsers: ['Firefox','Chrome','Safari', 'PhantomJS']
     }, done).start();
 });
 
@@ -186,7 +188,7 @@ Dev:
 Prod:
     serve-prod
         On start:
-            - push lib files/change references to prod
+            √ push lib files/change references to prod
         Every change:
             - run jshint
             - run unit tests

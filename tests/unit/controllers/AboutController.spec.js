@@ -12,4 +12,28 @@ describe("AboutController", function() {
     var controller = $controller('AboutController', {});
     expect(controller.developers.length).toEqual(2);
   });
+  
+  it("has names for each developer", function(){
+     var controller = $controller('AboutController', {});
+     controller.developers.forEach(function(element) {
+         expect(element.name).toBeDefined();
+         expect(angular.isString(element.name)).toBeTruthy();
+     }, this);
+  });
+  
+  it("has bios for each developer", function(){
+     var controller = $controller('AboutController', {});
+     controller.developers.forEach(function(element) {
+         expect(element.bio).toBeDefined();
+         expect(angular.isString(element.bio)).toBeTruthy();
+     }, this);
+  });
+  
+  it("has imageUrl for each developer", function(){
+     var controller = $controller('AboutController', {});
+     controller.developers.forEach(function(element) {
+         expect(element.imageUrl).toBeDefined();
+         expect(angular.isString(element.imageUrl)).toBeTruthy();
+     }, this);
+  });
 });
