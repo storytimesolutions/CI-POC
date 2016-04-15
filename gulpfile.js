@@ -14,7 +14,6 @@ var htmlreplace = require('gulp-html-replace');
 var browserSync = require('browser-sync').create();
 var Server      = require('karma').Server;
 var protractor  = require('gulp-protractor').protractor;
-//var webdriver_standalone = require("gulp-protractor").webdriver_standalone;
 
 
 /*Gulp Final Product Desires
@@ -64,10 +63,8 @@ gulp.task('clean', function(){
         .pipe(clean({force: true}));
 });
 
-gulp.task('package-scripts', ['clean'], function(){
+gulp.task('package-scripts', ['clean', 'jshint'], function(){
     return gulp.src(paths.scripts)
-        .pipe(jshint())
-        .pipe(jshint.reporter(stylish))
         .pipe(concat('app.js'))
         .pipe(gulp.dest(bases.dist_scripts))
         .pipe(uglify())
@@ -124,6 +121,13 @@ gulp.task('serve-prod', ['clean', 'dist'], function () {
 /// DEV Tasks ///
 /////////////////
 
+//JsHint
+gulp.task('jshint', function(){
+    gulp.src(paths.scripts)
+        .pipe(jshint())
+        .pipe(jshint.reporter(stylish)); 
+});
+
 //Run Jasmine Tests one-time with Karma
 gulp.task('test', function(done){
     new Server({
@@ -131,12 +135,6 @@ gulp.task('test', function(done){
         singleRun: true
     }, done).start();
 });
-
-// gulp.task('start-e2e-server', function(){
-//    (shell('webdriver-manager start')) 
-// });
-
-//gulp.task('webdriver-standalone', webdriver_standalone);
 
 //Run e2e test one-time with Protractor
 gulp.task('e2e', function(){
@@ -146,9 +144,12 @@ gulp.task('e2e', function(){
             args: ['--baseUrl', 'http://127.0.0.1:8000']
         }))
         .on('error', function(e) { throw e });
-})
+});
 
-gulp.task('dev-watch', ['test'], browserSync.reload);
+//Reload Browser
+gulp.task('reload', function(){
+    browserSync.reload();
+});
 
 // Serve the site from the src directory
 gulp.task('serve-dev', ['copy-libs'], function () {
@@ -156,18 +157,18 @@ gulp.task('serve-dev', ['copy-libs'], function () {
         server: __dirname + '/src'
     });
     
-    gulp.watch(["src/**/*.html", "src/**/*.js"], ['dev-watch']);
+    gulp.watch(["src/**/*.html", "src/**/*.js"], ['reload', 'jshint', 'test']);
     
 });
 
-// Currently, single run is solving this problem.
-//Be in TDD mode (Run tests on every change)
-// gulp.task('tdd', function(done){
-//     new Server({
-//         configFile: __dirname + '/karma-js.conf.js',
-//         singleRun: false
-//     }, done).start();
-// });
+
+//Be in TDD mode (Run tests on every change but can't have BrowserSync)
+gulp.task('tdd', function(done){
+    new Server({
+        configFile: __dirname + '/karma-js.conf.js',
+        singleRun: false
+    }, done).start();
+});
 
 gulp.task('default', ['serve-dev']);
 
