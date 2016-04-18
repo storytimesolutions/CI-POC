@@ -19,10 +19,17 @@ gulp
 ```
 
 ## Gulp commands
+`gulp`: Default command.  Same as `gulp serve-dev`
+
 `gulp serve-dev`: Serve local dev source with BrowserSync and run unit tests and jshint with each change
 
 `gulp serve-prod`: Packages the code to `/dist/` folder and serves from that dist directory
 
 `gulp tdd`: Runs unit tests every changes in a much faster, more efficient manner (sorry, two servers running at same time I have not mastered but maybe you can :) )
 
-`gulp test`: Runs unit tests and e2e tests once.
+`gulp test`: Runs unit tests and e2e tests once
+
+### Less Common Gulp Commands
+`gulp unit-test` - Runs unit tests once
+
+`gulp e2e` - Runs end-to-end test once
