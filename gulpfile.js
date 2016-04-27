@@ -95,11 +95,6 @@ gulp.task('package-css', ['clean'], function(){
         .pipe(gulp.dest(bases.dist));
 });
 
-gulp.task('copy-libs', function(){
-     return gulp.src(paths.libs)
-        .pipe(gulp.dest(bases.src_libs));
-});
-
 // Can't clean while serving server :(
 //gulp.task('prod-watch', ['dist'], browserSync.reload);
 
@@ -151,6 +146,11 @@ gulp.task('e2e', function(){
 //Reload Browser
 gulp.task('reload', function(){
     browserSync.reload();
+});
+
+gulp.task('copy-libs', function(){
+     return gulp.src(paths.libs)
+        .pipe(gulp.dest(bases.src_libs));
 });
 
 // Serve the site from the src directory

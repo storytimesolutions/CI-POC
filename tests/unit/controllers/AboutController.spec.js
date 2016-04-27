@@ -36,4 +36,10 @@ describe("AboutController", function() {
          expect(angular.isString(element.imageUrl)).toBeTruthy();
      }, this);
   });
+  
+  it("has a developer named Homer", function(){
+      
+     var controller = $controller('AboutController', {});
+     expect(controller.developers[0].name).toBe("Homer Simpson");
+  });
 });
