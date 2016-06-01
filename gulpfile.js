@@ -46,7 +46,7 @@ var bases = {
 
 var paths = {
     scripts: [ bases.src_app + '**/*.js'],
-    libs: [
+    libs: [ 
         'node_modules/angular/angular.min.js',
         'node_modules/angular-route/angular-route.min.js',
         'node_modules/bootstrap/dist/js/bootstrap.min.js',
